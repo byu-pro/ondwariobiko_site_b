@@ -1317,7 +1317,7 @@ const initMarquee = () => {
       let master = gsap
         .timeline()
         //.add(marquee(marqueeObject.el, 20, dirFromLeft), 0);
-        .add(marqueeRight(marqueeObject.el, 30, dirFromRight), 0);
+        .add(marqueeRight(marqueeObject.el, 240, dirFromRight), 0);
       let tween = gsap.to(master, { 
         duration: 1.5, 
         timeScale: 1, 
