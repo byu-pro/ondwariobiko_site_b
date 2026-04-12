@@ -114,14 +114,14 @@
   --base-rgb--light: 250, 247, 246;
   --base-tint--light: #FFFFFF;
   --base-shade--light: #e0dddb;
-  --base-opp--light: #161616;
+  --base-opp--light: #000000;
   --base-opp-tint--light: #1C1C1C;
-  --accent--light: #161616;
-  --accent-rgb--light: 22, 22, 22;
+  --accent--light: #000000;
+  --accent-rgb--light: 0, 0, 0;
   --additional--light: #ccff00;
   --additional-rgb--light: 204, 255, 0;
   --neutral-transparent--light: rgba(255, 255, 255, 0.3);
-  --st-bright--light: #161616;
+  --st-bright--light: #000000;
   --st-medium--light: #7C7C7C;
   --st-muted--light: #E0DDDB;
   --st-opp-bright--light: #FFFFFF;
@@ -131,7 +131,7 @@
   --fw-bold--light: 800;
   --fw-regular-opp--light: 300;
   --fw-medium-opp--light: 500;
-  --t-bright--light: #161616;
+  --t-bright--light: #000000;
   --t-medium--light: #303030;
   --t-muted--light: #585858;
   --t-muted-extra--light: #B2AEAD;
@@ -148,16 +148,16 @@
   --bg-demo-screen-08--light: url(../img/demo/screens/08.webp);
   --bg-demo-screen-09--light: url(../img/demo/screens/09.webp);
   /* dark color scheme */
-  --base--dark: #161616;
-  --base-rgb--dark: 22, 22, 22;
+  --base--dark: #000000;
+  --base-rgb--dark: 0, 0, 0;
   --base-tint--dark: #1C1C1C;
   --base-shade--dark: #0a0a0a;
   --base-opp--dark: #FAF7F6;
   --base-opp-tint--dark: #ffffff;
   --accent--dark: #ccff00;
   --accent-rgb--dark: 204, 255, 0;
-  --additional--dark: #161616;
-  --additional-rgb--dark: 22, 22, 22;
+  --additional--dark: #000000;
+  --additional-rgb--dark: 0, 0, 0;
   --neutral-transparent--dark: rgba(0, 0, 0, 0.3);
   --st-bright--dark: #FFFFFF;
   --st-medium--dark: #646464;
@@ -173,7 +173,7 @@
   --t-medium--dark: #ACACAC;
   --t-muted--dark: #838383;
   --t-muted-extra--dark: #535151;
-  --t-opp-bright--dark: #161616;
+  --t-opp-bright--dark: #000000;
   --t-opp-medium--dark: #303030;
   --t-opp-muted--dark: #969696;
   --bg-demo-screen-01--dark: url(../img/demo/screens/01-d.webp);
@@ -187,12 +187,12 @@
   --bg-demo-screen-09--dark: url(../img/demo/screens/09-d.webp);
   /* permanent colors */
   --pt-base: #FFFFFF;
-  --pt-base-dark: #161616;
+  --pt-base-dark: #000000;
   --pt-t-light-bright: #FFFFFF;
-  --pt-t-dark-bright: #161616;
+  --pt-t-dark-bright: #000000;
   --pt-st-light-bright: #FFFFFF;
-  --pt-st-dark-bright: #161616;
-  --pt-purple-rgb: 22, 22, 22;
+  --pt-st-dark-bright: #000000;
+  --pt-purple-rgb: 0, 0, 0;
   --pt-purple-dark-rgb: 33, 10, 113;
   /* neutral colors */
   --nl-white: #ffffff;
