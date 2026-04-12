@@ -1,13 +1,10 @@
 /*! ------------------------------------------------
- * Project Name: Rayo - Digital Agency & Personal Portfolio HTML Template
- * Project Description: Elevate your digital presence with Rayo - dynamic and stylish HTML template designed for creative agencies and personal brands. With modern layouts, smooth interactions and a polished aesthetic, Rayo template helps showcase projects, services and expertise with clarity and impact.
- * Tags: mix_design, resume, portfolio, personal page, cv, template, one page, responsive, html5, css3, creative, clean, agency, studio
+ * Project Name: Ondwari Obiko - Digital Architect & Brand Engineer
+ * Project Description: Portfolio of Ondwari Obiko, a Digital Architect and Brand Engineer specializing in strategic brand systems and high-fidelity web design.
+ * Tags: ondwari obiko, resume, portfolio, personal page, cv, digital architecture, brand engineering
  * Version: 1.0.0
- * Build Date: July 2025
- * Last Update: January 2026
- * This product is available exclusively on Themeforest
- * Author: mix_design
- * Author URI: https://themeforest.net/user/mix_design
+ * Author: Ondwari Obiko
+ * Author URI: https://ondwariobiko.com
  * File name: app.js
  * ------------------------------------------------
 
