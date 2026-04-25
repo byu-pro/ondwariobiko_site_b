@@ -2201,6 +2201,20 @@ p.t-semibold {
   color: var(--t-bright);
   background: none;
 }
+@media only screen and (max-width: 576px) {
+  .mxd-point-subtitle {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    font-size: 1.8rem;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+  .mxd-point-subtitle a {
+    overflow-wrap: anywhere;
+  }
+}
 .no-touch .mxd-point-subtitle:hover a {
   color: var(--t-medium);
 }
