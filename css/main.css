@@ -6968,6 +6968,17 @@ form textarea:required:valid {
 }
 
 /* ------------------------------------------------*/
+
+@media only screen and (max-width: 576px) {
+  .footer-blocks__card .mxd-point-subtitle {
+    -webkit-box-pack: center !important;
+       -moz-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+    margin-left: 0 !important;
+  }
+}
+
 /* Block - Footer End */
 /* ------------------------------------------------*/
 /* ------------------------------------------------*/
