@@ -2210,6 +2210,7 @@ p.t-semibold {
     font-size: 1.8rem;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
+    margin-left: -3ch;
   }
   .mxd-point-subtitle a {
     overflow-wrap: anywhere;
