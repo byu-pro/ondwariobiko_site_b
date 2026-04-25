@@ -6936,11 +6936,14 @@ form textarea:required:valid {
 
 @media only screen and (max-width: 576px) {
   .footer-blocks__card .mxd-point-subtitle {
-    -webkit-box-pack: center !important;
-       -moz-box-pack: center !important;
-        -ms-flex-pack: center !important;
-            justify-content: center !important;
+    -webkit-box-pack: start !important;
+       -moz-box-pack: start !important;
+        -ms-flex-pack: start !important;
+            justify-content: flex-start !important;
     margin-left: 0 !important;
+  }
+  .footer-blocks__card .mxd-point-subtitle svg {
+    display: none !important;
   }
 }
 
