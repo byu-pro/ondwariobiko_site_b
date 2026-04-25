@@ -493,6 +493,21 @@
   background-image: url(../my_brand_assets/icons/400by200thumbnail.svg);
 }
 
+/* Light Theme Overrides for Header Thumbnails */
+[color-scheme=light] .headline-img-01::before,
+[color-scheme=light] .headline-img-02::before,
+[color-scheme=light] .headline-img-04::before,
+[color-scheme=light] .headline-img-05::before,
+[color-scheme=light] .headline-img-06::before,
+[color-scheme=light] .headline-img-07::before {
+  background-image: url(../my_brand_assets/icons/400by200thumbnail_white.svg);
+}
+
+[color-scheme=light] .headline-img-03::after {
+  background-image: url(../my_brand_assets/icons/400by200thumbnail_white.svg);
+}
+
+
 .image-values-1 {
   background-image: url(https://dummyimage.com/1200x1600/5d5d5d/838383);
 }
