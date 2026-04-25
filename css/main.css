@@ -19190,6 +19190,12 @@ form textarea:required:valid {
   position: relative;
   overflow: hidden;
 }
+.services-stack__image .service-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
 .services-stack__image .service-img-m {
   display: none;
 }
@@ -19209,6 +19215,7 @@ form textarea:required:valid {
     bottom: 0;
     height: 100%;
     width: auto;
+    object-fit: cover;
   }
   .services-stack__image .service-img-s {
     display: none;
@@ -19225,6 +19232,7 @@ form textarea:required:valid {
     max-height: none;
     height: 110%;
     width: auto;
+    object-fit: cover;
   }
 }
 
