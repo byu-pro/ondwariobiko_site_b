@@ -19204,17 +19204,17 @@ form textarea:required:valid {
     position: absolute;
     top: 0;
     right: 0;
-    width: 100%;
+    width: 50%;
     height: 100%;
     z-index: 0;
     padding-left: 0;
   }
   .services-stack__image .service-img {
     position: absolute;
-    right: -15%;
+    right: 0;
     bottom: 0;
     height: 100%;
-    width: auto;
+    width: 100%;
     object-fit: cover;
   }
   .services-stack__image .service-img-s {
@@ -19228,10 +19228,9 @@ form textarea:required:valid {
   .services-stack__image .service-img {
     position: absolute;
     right: 0;
-    bottom: -5%;
-    max-height: none;
-    height: 110%;
-    width: auto;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
   }
 }
