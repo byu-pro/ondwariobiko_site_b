@@ -374,6 +374,10 @@
   font: normal var(--fw-medium) 6rem/0.9 var(--_font-accent);
   letter-spacing: -0.06rem;
   color: var(--t-bright);
+  transition: color 0.3s ease;
+}
+.loader__count.is-complete span {
+  color: #ccff00 !important;
 }
 @media only screen and (min-width: 768px) {
   .loader__count span {

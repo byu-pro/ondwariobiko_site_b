@@ -74,6 +74,11 @@ function startLoader() {
       let increment = Math.floor(Math.random() * 10) + 1;
       currentValue = Math.min(currentValue + increment, 100);
       counterElement.textContent = currentValue;
+      if (currentValue === 100) {
+        let loaderCount = document.querySelector(".loader__count");
+        if (loaderCount) loaderCount.classList.add("is-complete");
+        gsap.to(".loader__count span", { color: "#ccff00", duration: 0.3, ease: 'power2.out' });
+      }
       let delay = Math.floor(Math.random() * 120) + 25;
       setTimeout(updateCounter, delay);
     }
