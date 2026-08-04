@@ -1478,9 +1478,10 @@ $(".btn-to-top").each(function() {
     autoAlpha: 1,
     scrollTrigger: {
       trigger: "body",
-      start: "top -20%",
-      end: "top -20%",
-      toggleActions: "play none reverse none"
+      start: () => (document.documentElement.scrollHeight - window.innerHeight) / 2,
+      end: () => (document.documentElement.scrollHeight - window.innerHeight) / 2,
+      toggleActions: "play none reverse none",
+      invalidateOnRefresh: true
     }
   });
 });
