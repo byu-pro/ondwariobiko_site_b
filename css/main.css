@@ -6186,7 +6186,7 @@ form textarea:required:valid {
 @media only screen and (min-width: 1200px) {
   .menu-promo {
     height: 100%;
-    text-align: left;
+    text-align: right;
   }
 }
 @media only screen and (min-width: 1600px) {
@@ -6213,11 +6213,11 @@ form textarea:required:valid {
     position: absolute;
     right: 0;
     bottom: 0;
-    -webkit-box-align: start;
-       -moz-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-    text-align: left;
+    -webkit-box-align: end;
+       -moz-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+    text-align: right;
     gap: 2rem;
     width: 85%;
     padding: 0 4rem;
@@ -6231,32 +6231,33 @@ form textarea:required:valid {
 
 .menu-promo__caption {
   font-weight: var(--fw-regular-opp);
-  color: var(--t-opp-medium);
-  text-align: left;
-  line-height: 1.5;
+  color: var(--t-opp-bright);
+  text-align: right;
+  line-height: 1.6;
+  font-size: 1.8rem;
   margin: 0;
 }
 @media only screen and (min-width: 1200px) {
   .menu-promo__caption {
-    max-width: 420px;
+    max-width: 440px;
   }
 }
 
 .menu-promo__badge {
   display: inline-block;
-  padding: 1.4rem 2rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.4rem 2.2rem;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 1.6rem;
-  backdrop-filter: blur(10px);
-  max-width: 420px;
+  text-align: right;
+  max-width: 440px;
 }
 .menu-promo__badge p {
   margin: 0;
-  color: #ffffff;
-  font-size: 1.5rem;
+  color: var(--t-opp-bright);
+  font-size: 1.6rem;
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .menu-promo__video {
