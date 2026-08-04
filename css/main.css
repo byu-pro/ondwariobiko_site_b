@@ -466,31 +466,31 @@
 }
 
 .headline-img-01::before {
-  background-image: url(../my_brand_assets/icons/400by200thumbnail.svg);
+  background-image: url(../img/icons/400by200thumbnail.svg);
 }
 
 .headline-img-02::before {
-  background-image: url(../my_brand_assets/icons/400by200thumbnail.svg);
+  background-image: url(../img/icons/400by200thumbnail.svg);
 }
 
 .headline-img-03::after {
-  background-image: url(../my_brand_assets/icons/400by200thumbnail.svg);
+  background-image: url(../img/icons/400by200thumbnail.svg);
 }
 
 .headline-img-04::before {
-  background-image: url(../my_brand_assets/icons/400by200thumbnail.svg);
+  background-image: url(../img/icons/400by200thumbnail.svg);
 }
 
 .headline-img-05::before {
-  background-image: url(../my_brand_assets/icons/400by200thumbnail.svg);
+  background-image: url(../img/icons/400by200thumbnail.svg);
 }
 
 .headline-img-06::before {
-  background-image: url(../my_brand_assets/icons/400by200thumbnail.svg);
+  background-image: url(../img/icons/400by200thumbnail.svg);
 }
 
 .headline-img-07::before {
-  background-image: url(../my_brand_assets/icons/400by200thumbnail.svg);
+  background-image: url(../img/icons/400by200thumbnail.svg);
 }
 
 /* Light Theme Overrides for Header Thumbnails */
@@ -500,11 +500,11 @@
 [color-scheme=light] .headline-img-05::before,
 [color-scheme=light] .headline-img-06::before,
 [color-scheme=light] .headline-img-07::before {
-  background-image: url(../my_brand_assets/icons/400by200thumbnail_white.svg);
+  background-image: url(../img/icons/400by200thumbnail_white.svg);
 }
 
 [color-scheme=light] .headline-img-03::after {
-  background-image: url(../my_brand_assets/icons/400by200thumbnail_white.svg);
+  background-image: url(../img/icons/400by200thumbnail_white.svg);
 }
 
 
