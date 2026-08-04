@@ -18351,8 +18351,66 @@ form textarea:required:valid {
 /* Features - Divider Image Parallax End */
 /* ------------------------------------------------*/
 /* ------------------------------------------------*/
-/* Features - Marquee Start */
+/* Software Stack Marquee Start */
 /* ------------------------------------------------*/
+.mxd-software-marquee {
+  overflow: hidden;
+  padding: 1.5rem 0;
+}
+.mxd-software-marquee .marquee__toleft {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  width: max-content;
+}
+.mxd-software-card {
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2.2rem;
+  width: 14rem;
+  height: 14rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  padding: 1.6rem;
+  margin-right: 1.6rem;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+  user-select: none;
+}
+.mxd-software-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  border-color: rgba(204, 255, 0, 0.4);
+  background: #1c1c1c;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+.mxd-software-card__icon {
+  width: 4.4rem;
+  height: 4.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mxd-software-card__icon svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.mxd-software-card__name {
+  font-family: var(--_font-accent);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-align: center;
+}
+/* ------------------------------------------------*/
+/* Software Stack Marquee End */
+/* ------------------------------------------------*/
+
 .marquee {
   max-width: 100%;
   overflow: hidden;
