@@ -6177,6 +6177,7 @@ form textarea:required:valid {
 .menu-promo {
   position: relative;
   padding: 0 3rem;
+  text-align: left;
 }
 @media only screen and (min-width: 768px) {
   .menu-promo {
@@ -6206,7 +6207,12 @@ form textarea:required:valid {
      -moz-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 2rem;
+  -webkit-box-align: start;
+     -moz-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  text-align: left;
+  gap: 1.6rem;
 }
 @media only screen and (min-width: 1200px) {
   .menu-promo__content {
@@ -6232,32 +6238,48 @@ form textarea:required:valid {
 .menu-promo__caption {
   font-weight: var(--fw-regular-opp);
   color: var(--t-opp-bright);
-  text-align: right;
-  line-height: 1.6;
-  font-size: 1.8rem;
+  text-align: left;
+  line-height: 1.5;
+  font-size: 1.6rem;
   margin: 0;
 }
 @media only screen and (min-width: 1200px) {
   .menu-promo__caption {
+    text-align: right;
+    font-size: 1.8rem;
+    line-height: 1.6;
     max-width: 440px;
   }
 }
 
 .menu-promo__badge {
   display: inline-block;
-  padding: 1.4rem 2.2rem;
+  padding: 1.4rem 2rem;
   background: rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 1.6rem;
-  text-align: right;
-  max-width: 440px;
+  text-align: left;
+  max-width: 100%;
 }
 .menu-promo__badge p {
   margin: 0;
   color: var(--t-opp-bright);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.4;
+  text-align: left;
+}
+@media only screen and (min-width: 1200px) {
+  .menu-promo__badge {
+    text-align: right;
+    max-width: 440px;
+    padding: 1.4rem 2.2rem;
+  }
+  .menu-promo__badge p {
+    text-align: right;
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
 }
 
 .menu-promo__video {
