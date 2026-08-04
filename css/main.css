@@ -6031,6 +6031,17 @@ form textarea:required:valid {
   font: normal var(--fw-medium-opp) 3.6rem var(--_font-accent);
   color: var(--t-opp-bright);
 }
+.main-menu__link.active,
+.main-menu__link.active .btn-caption,
+.main-menu__link.active .btn-anim__letter,
+.main-menu__item.active > .main-menu__link,
+.main-menu__item.active > .main-menu__link .btn-caption,
+.main-menu__item.active > .main-menu__link .btn-anim__letter,
+.main-menu__link[aria-current="page"],
+.main-menu__link[aria-current="page"] .btn-caption,
+.main-menu__link[aria-current="page"] .btn-anim__letter {
+  color: #ccff00 !important;
+}
 .main-menu__link .btn-caption {
   height: 4.2rem;
   line-height: 4.2rem;

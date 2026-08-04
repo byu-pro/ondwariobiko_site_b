@@ -1266,8 +1266,8 @@ const initMarquees = () => {
       
       let master = gsap
         .timeline()
-        .add(marquee(topEl, 30, dirFromLeft, 100 / copiesTop), 0)
-        .add(marquee(bottomEl, 30, dirFromRight, 100 / copiesBottom), 0);
+        .add(marquee(topEl, 50, dirFromLeft, 100 / copiesTop), 0)
+        .add(marquee(bottomEl, 50, dirFromRight, 100 / copiesBottom), 0);
       let tween = gsap.to(master, { 
         duration: 1.5, 
         timeScale: 1, 
@@ -1501,4 +1501,45 @@ gsap.to("[data-speed]", {
 });
 // --------------------------------------------- //
 // Parallax Universal End
+// --------------------------------------------- //
+
+// --------------------------------------------- //
+// Active Menu Link Highlighter Start
+// --------------------------------------------- //
+const highlightActiveMenu = () => {
+  let path = window.location.pathname.split("/").pop();
+  if (!path || path === "" || path === "index.html") {
+    path = "index.html";
+  }
+  
+  document.querySelectorAll(".main-menu__link").forEach((link) => {
+    const href = link.getAttribute("href");
+    if (!href) return;
+    const cleanHref = href.split("/").pop();
+    
+    let isActive = false;
+    if (cleanHref === path) {
+      isActive = true;
+    } else if (path.startsWith("project_") && cleanHref === "works.html") {
+      isActive = true;
+    } else if (path.startsWith("article_") && cleanHref === "insights.html") {
+      isActive = true;
+    }
+    
+    if (isActive) {
+      link.classList.add("active");
+      link.setAttribute("aria-current", "page");
+      if (link.parentElement) {
+        link.parentElement.classList.add("active");
+      }
+    }
+  });
+};
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", highlightActiveMenu);
+} else {
+  highlightActiveMenu();
+}
+// --------------------------------------------- //
+// Active Menu Link Highlighter End
 // --------------------------------------------- //
