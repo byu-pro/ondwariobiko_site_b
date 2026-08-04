@@ -425,6 +425,10 @@
   background-image: url('../img/promo/1400x900 Background.png');
 }
 
+[color-scheme=light] .mxd-promo__bg {
+  background-image: url('../img/promo/1400x900 Backgroundwhite.png');
+}
+
 .preview-image-1 {
   background-image: url(https://dummyimage.com/1400x1400/5d5d5d/838383);
 }
