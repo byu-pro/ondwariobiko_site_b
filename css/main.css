@@ -18355,40 +18355,40 @@ form textarea:required:valid {
 /* ------------------------------------------------*/
 .mxd-software-marquee {
   overflow: hidden;
-  padding: 1.5rem 0;
+  padding: 3rem 0;
 }
 .mxd-software-marquee .marquee__toleft {
   display: flex;
   align-items: center;
-  gap: 1.6rem;
+  gap: 2rem;
   width: max-content;
 }
 .mxd-software-card {
   background: #141414;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 2.2rem;
-  width: 14rem;
-  height: 14rem;
+  border-radius: 3rem;
+  width: 21rem;
+  height: 21rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.2rem;
-  padding: 1.6rem;
-  margin-right: 1.6rem;
+  gap: 1.8rem;
+  padding: 2.4rem;
+  margin-right: 2rem;
   transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
   flex-shrink: 0;
   user-select: none;
 }
 .mxd-software-card:hover {
-  transform: translateY(-5px) scale(1.03);
+  transform: translateY(-6px) scale(1.03);
   border-color: rgba(204, 255, 0, 0.4);
   background: #1c1c1c;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
 }
 .mxd-software-card__icon {
-  width: 4.4rem;
-  height: 4.4rem;
+  width: 7.2rem;
+  height: 7.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18400,12 +18400,29 @@ form textarea:required:valid {
 }
 .mxd-software-card__name {
   font-family: var(--_font-accent);
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-weight: 500;
   color: #ffffff;
   letter-spacing: -0.01em;
   margin: 0;
   text-align: center;
+}
+@media only screen and (max-width: 767px) {
+  .mxd-software-card {
+    width: 16rem;
+    height: 16rem;
+    border-radius: 2.2rem;
+    gap: 1.2rem;
+    padding: 1.6rem;
+    margin-right: 1.4rem;
+  }
+  .mxd-software-card__icon {
+    width: 5.4rem;
+    height: 5.4rem;
+  }
+  .mxd-software-card__name {
+    font-size: 1.5rem;
+  }
 }
 /* ------------------------------------------------*/
 /* Software Stack Marquee End */
