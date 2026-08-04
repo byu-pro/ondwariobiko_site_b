@@ -1237,30 +1237,37 @@ const optionsPlus = {
 // --------------------------------------------- //
 const initMarquees = () => {
   const items = [...document.querySelectorAll(".marquee--gsap")];
-  if (items) {
-    const marqueeObject = {
-      top: {
-        el: null,
-        width: 0
-      },
-      bottom: {
-        el: null,
-        width: 0
-      }
-    };
+  if (items.length) {
     items.forEach((itemBlock) => {
-      marqueeObject.top.el = itemBlock.querySelector(".marquee__top");
-      marqueeObject.bottom.el = itemBlock.querySelector(".marquee__bottom");
-      marqueeObject.top.width = marqueeObject.top.el.offsetWidth;
-      marqueeObject.bottom.width = marqueeObject.bottom.el.offsetWidth;
-      marqueeObject.top.el.innerHTML += marqueeObject.top.el.innerHTML;
-      marqueeObject.bottom.el.innerHTML += marqueeObject.bottom.el.innerHTML;
-      let dirFromLeft = "-=50%";
-      let dirFromRight = "+=50%";
+      const topEl = itemBlock.querySelector(".marquee__top");
+      const bottomEl = itemBlock.querySelector(".marquee__bottom");
+      
+      const originalTopHTML = topEl.innerHTML;
+      const originalBottomHTML = bottomEl.innerHTML;
+      
+      const W_top = topEl.offsetWidth || 1000;
+      const W_bottom = bottomEl.offsetWidth || 1000;
+      
+      const copiesTop = Math.max(3, Math.ceil((window.innerWidth * 3) / W_top));
+      const copiesBottom = Math.max(3, Math.ceil((window.innerWidth * 3) / W_bottom));
+      
+      topEl.innerHTML = "";
+      for (let i = 0; i < copiesTop; i++) {
+        topEl.innerHTML += originalTopHTML;
+      }
+      
+      bottomEl.innerHTML = "";
+      for (let i = 0; i < copiesBottom; i++) {
+        bottomEl.innerHTML += originalBottomHTML;
+      }
+      
+      let dirFromLeft = `-=${100 / copiesTop}%`;
+      let dirFromRight = `+=${100 / copiesBottom}%`;
+      
       let master = gsap
         .timeline()
-        .add(marquee(marqueeObject.top.el, 30, dirFromLeft), 0)
-        .add(marquee(marqueeObject.bottom.el, 30, dirFromRight), 0);
+        .add(marquee(topEl, 30, dirFromLeft, 100 / copiesTop), 0)
+        .add(marquee(bottomEl, 30, dirFromRight, 100 / copiesBottom), 0);
       let tween = gsap.to(master, { 
         duration: 1.5, 
         timeScale: 1, 
@@ -1278,8 +1285,8 @@ const initMarquees = () => {
     });
   }
 };
-const marquee = (item, time, direction) => {
-  let mod = gsap.utils.wrap(0, 50);
+const marquee = (item, time, direction, wrapVal) => {
+  let mod = gsap.utils.wrap(0, wrapVal);
   return gsap.to(item, {
     duration: time,
     ease: "none",
@@ -1291,30 +1298,25 @@ const marquee = (item, time, direction) => {
   });
 };
 initMarquees();
-// --------------------------------------------- //
-// Marquee - Two Lines End
-// --------------------------------------------- //
 
-// --------------------------------------------- //
-// Marquee - One Line To Right Start
-// --------------------------------------------- //
 const initMarquee = () => {
   const items = [...document.querySelectorAll(".marquee-right--gsap")];
-  if (items) {
-    const marqueeObject = {
-      el: null,
-      width: 0
-    };
+  if (items.length) {
     items.forEach((itemBlock) => {
-      marqueeObject.el = itemBlock.querySelector(".marquee__toright");
-      marqueeObject.width = marqueeObject.el.offsetWidth;
-      marqueeObject.el.innerHTML += marqueeObject.el.innerHTML;
-      //let dirFromLeft = "-=50%";
-      let dirFromRight = "+=50%";
+      const el = itemBlock.querySelector(".marquee__toright");
+      const originalHTML = el.innerHTML;
+      const W = el.offsetWidth || 1000;
+      const copies = Math.max(3, Math.ceil((window.innerWidth * 3) / W));
+      
+      el.innerHTML = "";
+      for (let i = 0; i < copies; i++) {
+        el.innerHTML += originalHTML;
+      }
+      
+      let dirFromRight = `+=${100 / copies}%`;
       let master = gsap
         .timeline()
-        //.add(marquee(marqueeObject.el, 20, dirFromLeft), 0);
-        .add(marqueeRight(marqueeObject.el, 30, dirFromRight), 0);
+        .add(marqueeRight(el, 30, dirFromRight, 100 / copies), 0);
       let tween = gsap.to(master, { 
         duration: 1.5, 
         timeScale: 1, 
@@ -1332,8 +1334,8 @@ const initMarquee = () => {
     });
   }
 };
-const marqueeRight = (item, time, direction) => {
-  let mod = gsap.utils.wrap(0, 50);
+const marqueeRight = (item, time, direction, wrapVal) => {
+  let mod = gsap.utils.wrap(0, wrapVal);
   return gsap.to(item, {
     duration: time,
     ease: "none",
@@ -1345,30 +1347,25 @@ const marqueeRight = (item, time, direction) => {
   });
 };
 initMarquee();
-// --------------------------------------------- //
-// Marquee - One Line To Right End
-// --------------------------------------------- //
 
-// --------------------------------------------- //
-// Marquee - One Line To Left Start
-// --------------------------------------------- //
 const initMarqueeLeft = () => {
   const items = [...document.querySelectorAll(".marquee-left--gsap")];
-  if (items) {
-    const marqueeObject = {
-      el: null,
-      width: 0
-    };
+  if (items.length) {
     items.forEach((itemBlock) => {
-      marqueeObject.el = itemBlock.querySelector(".marquee__toleft");
-      marqueeObject.width = marqueeObject.el.offsetWidth;
-      marqueeObject.el.innerHTML += marqueeObject.el.innerHTML;
-      let dirFromLeft = "-=50%";
-      // let dirFromRight = "+=50%";
+      const el = itemBlock.querySelector(".marquee__toleft");
+      const originalHTML = el.innerHTML;
+      const W = el.offsetWidth || 1000;
+      const copies = Math.max(3, Math.ceil((window.innerWidth * 3) / W));
+      
+      el.innerHTML = "";
+      for (let i = 0; i < copies; i++) {
+        el.innerHTML += originalHTML;
+      }
+      
+      let dirFromLeft = `-=${100 / copies}%`;
       let master = gsap
         .timeline()
-        .add(marquee(marqueeObject.el, 30, dirFromLeft), 0);
-        // .add(marqueeRight(marqueeObject.el, 30, dirFromRight), 0);
+        .add(marqueeLeft(el, 30, dirFromLeft, 100 / copies), 0);
       let tween = gsap.to(master, { 
         duration: 1.5, 
         timeScale: 1, 
@@ -1386,8 +1383,8 @@ const initMarqueeLeft = () => {
     });
   }
 };
-const marqueeLeft = (item, time, direction) => {
-  let mod = gsap.utils.wrap(0, 50);
+const marqueeLeft = (item, time, direction, wrapVal) => {
+  let mod = gsap.utils.wrap(0, wrapVal);
   return gsap.to(item, {
     duration: time,
     ease: "none",
