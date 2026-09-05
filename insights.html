@@ -46,12 +46,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Custom Browser Color End -->
-    
-      <!-- Cache-Busting Settings Start -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <!-- Cache-Busting Settings End -->
+      <!-- Font Preload Start -->
+    <link rel="preload" href="fonts/Phosphor/Phosphor.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Font Preload End -->
   </head>
 
   <body>
@@ -848,8 +845,8 @@
     <!-- To Top Button End -->
 
     <!-- Load Scripts Start -->
-    <script src="js/libs.min.js?v=1775950985"></script>
-    <script src="js/app.js?v=1775950985"></script>
+    <script src="js/libs.min.js?v=1775950985" defer></script>
+    <script src="js/app.js?v=1775950985" defer></script>
     <!-- Load Scripts End -->
     
   </body>
