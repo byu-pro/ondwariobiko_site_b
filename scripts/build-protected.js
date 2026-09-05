@@ -97,12 +97,13 @@ function minifyJs(js) {
 }
 
 function rewriteHtmlReferences(html) {
+  const version = '1775952500';
   return html
-    .replace(/css\/loaders\/loader\.css(\?[^"']*)?/g, "css/loaders/loader.min.css")
-    .replace(/css\/plugins\.css(\?[^"']*)?/g, "css/plugins.min.css")
-    .replace(/css\/main\.css(\?[^"']*)?/g, "css/main.min.css")
-    .replace(/js\/app\.js(\?[^"']*)?/g, "js/app.min.js")
-    .replace(/js\/libs\.min\.js(\?[^"']*)?/g, "js/libs.min.js");
+    .replace(/css\/loaders\/loader\.css(\?[^"']*)?/g, `css/loaders/loader.min.css?v=${version}`)
+    .replace(/css\/plugins\.css(\?[^"']*)?/g, `css/plugins.min.css?v=${version}`)
+    .replace(/css\/main\.css(\?[^"']*)?/g, `css/main.min.css?v=${version}`)
+    .replace(/js\/app\.js(\?[^"']*)?/g, `js/app.min.js?v=${version}`)
+    .replace(/js\/libs\.min\.js(\?[^"']*)?/g, `js/libs.min.js?v=${version}`);
 }
 
 function writeFile(relative, content) {
