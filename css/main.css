@@ -19052,7 +19052,7 @@ form textarea:required:valid {
 }
 
 .mxd-services-stack__inner:hover .mxd-services-stack__controls .btn {
-  transform: scale(1.1) rotate(45deg);
+  transform: translate(4px, -4px);
 }
 
 .mxd-services-stack__inner.radius-dark {
