@@ -422,11 +422,11 @@
 }
 
 .mxd-promo__bg {
-  background-image: url('../img/promo/1400x900 Background.png');
+  background-image: url('../img/promo/1400x900 Backgroundwhite.png');
 }
 
 [color-scheme=light] .mxd-promo__bg {
-  background-image: url('../img/promo/1400x900 Backgroundwhite.png');
+  background-image: url('../img/promo/1400x900 Background.png');
 }
 
 .preview-image-1 {
@@ -6401,6 +6401,8 @@ form textarea:required:valid {
   background-position: left center;
   -moz-background-size: cover;
        background-size: cover;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.4) 15%, #000 35%);
+  mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.4) 15%, #000 35%);
 }
 @media only screen and (min-width: 1200px) {
   .mxd-promo__bg {
@@ -6408,6 +6410,8 @@ form textarea:required:valid {
     top: 0;
     right: 0;
     width: 50%;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.5) 20%, #000 45%);
+    mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, 0.5) 20%, #000 45%);
   }
 }
 
