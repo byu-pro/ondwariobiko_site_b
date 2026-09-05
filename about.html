@@ -1392,21 +1392,37 @@
     <script src="js/libs.min.js?v=1775950985" defer></script>
     <script src="js/app.js?v=1775950985" defer></script>
     <script>
-      const statsCounter1 = new countUp.CountUp("stats-counter-1", 50, optionsPlus);
-      const statsCounter2 = new countUp.CountUp("stats-counter-2", 80, optionsPercent);
-      const statsCounter3 = new countUp.CountUp("stats-counter-3", 5, optionsPlus);
-      const statsCounter4 = new countUp.CountUp("stats-counter-4", 70, optionsPlus);
-      statsCounter1.start();
-      statsCounter2.start();
-      statsCounter3.start();
-      statsCounter4.start();
+      window.addEventListener('load', function() {
+        if (typeof countUp !== 'undefined') {
+          if (document.getElementById('stats-counter-1')) {
+            const statsCounter1 = new countUp.CountUp("stats-counter-1", 50, typeof optionsPlus !== 'undefined' ? optionsPlus : {});
+            statsCounter1.start();
+          }
+          if (document.getElementById('stats-counter-2')) {
+            const statsCounter2 = new countUp.CountUp("stats-counter-2", 80, typeof optionsPercent !== 'undefined' ? optionsPercent : {});
+            statsCounter2.start();
+          }
+          if (document.getElementById('stats-counter-3')) {
+            const statsCounter3 = new countUp.CountUp("stats-counter-3", 5, typeof optionsPlus !== 'undefined' ? optionsPlus : {});
+            statsCounter3.start();
+          }
+          if (document.getElementById('stats-counter-4')) {
+            const statsCounter4 = new countUp.CountUp("stats-counter-4", 70, typeof optionsPlus !== 'undefined' ? optionsPlus : {});
+            statsCounter4.start();
+          }
+        }
+      });
     </script>
     <script>
-      $(window).on("scroll", function() {
-        if($(window).scrollTop() > 10) {
-            $(".mxd-header").addClass("is-hidden");
-        } else {
-          $(".mxd-header").removeClass("is-hidden");
+      window.addEventListener('load', function() {
+        if (typeof $ !== 'undefined') {
+          $(window).on("scroll", function() {
+            if($(window).scrollTop() > 10) {
+              $(".mxd-header").addClass("is-hidden");
+            } else {
+              $(".mxd-header").removeClass("is-hidden");
+            }
+          });
         }
       });
     </script>

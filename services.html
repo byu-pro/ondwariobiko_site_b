@@ -1000,10 +1000,18 @@
     <script src="js/libs.min.js?v=1775950985" defer></script>
     <script src="js/app.js?v=1775950985" defer></script>
     <script>
-      const statsCounter3 = new countUp.CountUp("stats-counter-3", 5, optionsPlus);
-      const statsCounter4 = new countUp.CountUp("stats-counter-4", 70, optionsPlus);
-      statsCounter3.start();
-      statsCounter4.start();
+      window.addEventListener('load', function() {
+        if (typeof countUp !== 'undefined') {
+          if (document.getElementById('stats-counter-3')) {
+            const statsCounter3 = new countUp.CountUp("stats-counter-3", 5, typeof optionsPlus !== 'undefined' ? optionsPlus : {});
+            statsCounter3.start();
+          }
+          if (document.getElementById('stats-counter-4')) {
+            const statsCounter4 = new countUp.CountUp("stats-counter-4", 70, typeof optionsPlus !== 'undefined' ? optionsPlus : {});
+            statsCounter4.start();
+          }
+        }
+      });
     </script>
     <!-- Load Scripts End -->
     

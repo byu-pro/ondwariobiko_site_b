@@ -1040,10 +1040,18 @@
     <script src="js/app.js?v=1775950985" defer></script>
     <!-- counters -->
     <script>
-      const statsCounter1 = new countUp.CountUp("stats-counter-1", 9, optionsPlus);
-      const statsCounter2 = new countUp.CountUp("stats-counter-2", 200, optionsPlus);
-      statsCounter1.start();
-      statsCounter2.start();
+      window.addEventListener('load', function() {
+        if (typeof countUp !== 'undefined' && typeof optionsPlus !== 'undefined') {
+          if (document.getElementById('stats-counter-1')) {
+            const statsCounter1 = new countUp.CountUp("stats-counter-1", 9, optionsPlus);
+            statsCounter1.start();
+          }
+          if (document.getElementById('stats-counter-2')) {
+            const statsCounter2 = new countUp.CountUp("stats-counter-2", 200, optionsPlus);
+            statsCounter2.start();
+          }
+        }
+      });
     </script>
     <!-- Load Scripts End -->
     
