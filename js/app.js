@@ -2063,6 +2063,7 @@ if (document.readyState === 'loading') {
     initPortfolioFiltering();
     initFaqSearchFilter();
     initMenuOpenObserver();
+    initPromoCardObserver();
   });
 } else {
   initCopyToClipboardToast();
@@ -2071,7 +2072,11 @@ if (document.readyState === 'loading') {
   initPortfolioFiltering();
   initFaqSearchFilter();
   initMenuOpenObserver();
+  initPromoCardObserver();
 }
+
+let isNavMenuOpen = false;
+let isPromoCardVisible = false;
 
 function setFloatingWidgetsState(visible) {
   const banner = document.querySelector('.floating-booking-banner');
@@ -2094,6 +2099,33 @@ function setFloatingWidgetsState(visible) {
   });
 }
 
+function updateFloatingWidgetsVisibility() {
+  const shouldHide = isNavMenuOpen || isPromoCardVisible;
+  setFloatingWidgetsState(!shouldHide);
+}
+
+// --------------------------------------------- //
+// Hide Banners & Floating UI when Approaching Promo CTA Card Start
+// --------------------------------------------- //
+function initPromoCardObserver() {
+  const promoEl = document.querySelector('.mxd-promo');
+  if (!promoEl) return;
+
+  function checkPromoProximity() {
+    const rect = promoEl.getBoundingClientRect();
+    const triggerThreshold = window.innerHeight * 0.85;
+    isPromoCardVisible = (rect.top <= triggerThreshold && rect.bottom >= 0);
+    updateFloatingWidgetsVisibility();
+  }
+
+  window.addEventListener('scroll', checkPromoProximity, { passive: true });
+  window.addEventListener('resize', checkPromoProximity, { passive: true });
+  checkPromoProximity();
+}
+// --------------------------------------------- //
+// Hide Banners & Floating UI when Approaching Promo CTA Card End
+// --------------------------------------------- //
+
 // --------------------------------------------- //
 // Hide Banners & Floating UI when Menu is Open Start
 // --------------------------------------------- //
@@ -2115,11 +2147,12 @@ function initMenuOpenObserver() {
     
     if (isNavOpen) {
       document.body.classList.add('menu-is-open');
-      setFloatingWidgetsState(false);
+      isNavMenuOpen = true;
     } else {
       document.body.classList.remove('menu-is-open');
-      setFloatingWidgetsState(true);
+      isNavMenuOpen = false;
     }
+    updateFloatingWidgetsVisibility();
   }
 
   checkMenuState();
