@@ -63,13 +63,30 @@ gsap.registerPlugin(Flip);
 const content = document.querySelector('body');
 const imgLoad = imagesLoaded(content);
 const loadingWrap = document.querySelector('.loading-wrap');
-const loadingItems = loadingWrap.querySelectorAll('.loading__item');
+const loadingItems = loadingWrap ? loadingWrap.querySelectorAll('.loading__item') : [];
 const fadeInItems = document.querySelectorAll('.loading__fade');
+
+let loaderDismissed = false;
+
+function safeHideLoader() {
+  if (loaderDismissed) return;
+  loaderDismissed = true;
+
+  let counterElement = document.querySelector(".loader__count .count__text");
+  if (counterElement) counterElement.textContent = "100";
+  let loaderCount = document.querySelector(".loader__count");
+  if (loaderCount) loaderCount.classList.add("is-complete");
+
+  hideLoader();
+  pageAppearance();
+}
 
 function startLoader() {
   let counterElement = document.querySelector(".loader__count .count__text");
+  if (!counterElement) return;
   let currentValue = 0;
   function updateCounter() {
+    if (loaderDismissed) return;
     if (currentValue < 100) {
       let increment = Math.floor(Math.random() * 10) + 1;
       currentValue = Math.min(currentValue + increment, 100);
@@ -87,32 +104,48 @@ function startLoader() {
 }
 startLoader();
 
+// Hard safety timer (2.8s) to guarantee loader fades out even on slow network or missing images
+const LOADER_TIMEOUT_MS = 2800;
+const loaderFailsafeTimer = setTimeout(() => {
+  safeHideLoader();
+}, LOADER_TIMEOUT_MS);
+
 imgLoad.on('done', instance => {
-  hideLoader();
-  pageAppearance();
+  clearTimeout(loaderFailsafeTimer);
+  safeHideLoader();
+});
+
+imgLoad.on('fail', instance => {
+  clearTimeout(loaderFailsafeTimer);
+  safeHideLoader();
 });
 
 function hideLoader() {
-  gsap.to(".loader__count", { duration: 0.8, ease: 'power2.in', y: "100%", delay: 1.8 });
-  gsap.to(".loader__wrapper", { duration: 0.8, ease: 'power4.in', y: "-100%", delay: 2.2 });
+  gsap.to(".loader__count", { duration: 0.8, ease: 'power2.in', y: "100%", delay: 0.2 });
+  gsap.to(".loader__wrapper", { duration: 0.8, ease: 'power4.in', y: "-100%", delay: 0.5 });
   setTimeout(() => {
-    document.getElementById("loader").classList.add("loaded");
-  }, 3200);
+    let loaderEl = document.getElementById("loader");
+    if (loaderEl) loaderEl.classList.add("loaded");
+  }, 1400);
 }
 
 function pageAppearance() {
-  gsap.set(loadingItems, { opacity: 0 })
-  gsap.to(loadingItems, { 
-    duration: 1.1,
-    ease: 'power4',
-    startAt: {y: 120},
-    y: 0,
-    opacity: 1,
-    delay: 0.8,
-    stagger: 0.08
-  }, '>-=1.1');
-  gsap.set(fadeInItems, { opacity: 0 });
-  gsap.to(fadeInItems, { duration: 0.8, ease: 'none', opacity: 1, delay: 3.2 });
+  if (loadingItems && loadingItems.length > 0) {
+    gsap.set(loadingItems, { opacity: 0 });
+    gsap.to(loadingItems, { 
+      duration: 1.1,
+      ease: 'power4',
+      startAt: {y: 120},
+      y: 0,
+      opacity: 1,
+      delay: 0.4,
+      stagger: 0.08
+    });
+  }
+  if (fadeInItems && fadeInItems.length > 0) {
+    gsap.set(fadeInItems, { opacity: 0 });
+    gsap.to(fadeInItems, { duration: 0.8, ease: 'none', opacity: 1, delay: 0.6 });
+  }
 }
 // --------------------------------------------- //
 // Loader & Loading Animation End
@@ -1545,6 +1578,144 @@ if (document.readyState === "loading") {
 } else {
   highlightActiveMenu();
 }
+// --------------------------------------------- //
+// Active Menu Link Highlighter End
+// --------------------------------------------- //
+
+// --------------------------------------------- //
+// Site-Wide Network Resilience & Toast Widget Start
+// --------------------------------------------- //
+class NetworkResilience {
+  constructor() {
+    this.toastEl = null;
+    this.initToast();
+    this.bindEvents();
+    this.registerServiceWorker();
+    this.checkInitialConnection();
+  }
+
+  initToast() {
+    if (document.querySelector('.network-status-toast')) return;
+    
+    const toast = document.createElement('div');
+    toast.className = 'network-status-toast';
+    toast.setAttribute('aria-live', 'polite');
+    toast.innerHTML = `
+      <div class="network-status-toast__dot"></div>
+      <span class="network-status-toast__text">Offline Mode</span>
+      <button class="network-status-toast__btn" type="button">Retry</button>
+    `;
+    document.body.appendChild(toast);
+    this.toastEl = toast;
+
+    const btn = toast.querySelector('.network-status-toast__btn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        if (navigator.onLine) {
+          window.location.reload();
+        } else {
+          this.showToast('offline', 'Still offline. Check connection.', true);
+        }
+      });
+    }
+  }
+
+  showToast(type, message, showButton = false) {
+    if (!this.toastEl) return;
+
+    this.toastEl.className = `network-status-toast is-visible network-status-toast--${type}`;
+    const textEl = this.toastEl.querySelector('.network-status-toast__text');
+    const btnEl = this.toastEl.querySelector('.network-status-toast__btn');
+
+    if (textEl) textEl.textContent = message;
+    if (btnEl) btnEl.style.display = showButton ? 'inline-block' : 'none';
+
+    if (type === 'online') {
+      setTimeout(() => {
+        this.hideToast();
+      }, 3500);
+    }
+  }
+
+  hideToast() {
+    if (this.toastEl) {
+      this.toastEl.classList.remove('is-visible');
+    }
+  }
+
+  checkInitialConnection() {
+    if (!navigator.onLine) {
+      this.showToast('offline', 'Offline Mode — Cached pages available', true);
+    } else if (navigator.connection) {
+      const conn = navigator.connection;
+      if (conn.effectiveType === '2g' || conn.effectiveType === 'slow-2g' || conn.rtt > 1500) {
+        this.showToast('slow', 'Slow connection detected — speed mode active', false);
+        setTimeout(() => this.hideToast(), 4000);
+      }
+    }
+  }
+
+  bindEvents() {
+    window.addEventListener('online', () => {
+      this.showToast('online', 'Connection restored', false);
+    });
+
+    window.addEventListener('offline', () => {
+      this.showToast('offline', 'You are offline — using cached content', true);
+    });
+
+    if (navigator.connection) {
+      navigator.connection.addEventListener('change', () => {
+        if (!navigator.onLine) return;
+        const conn = navigator.connection;
+        if (conn.effectiveType === '2g' || conn.effectiveType === 'slow-2g') {
+          this.showToast('slow', 'Slow network detected', false);
+        }
+      });
+    }
+
+    // Global Error & Promise Rejection Handler
+    window.addEventListener('error', (event) => {
+      if (typeof safeHideLoader === 'function') safeHideLoader();
+    });
+
+    window.addEventListener('unhandledrejection', (event) => {
+      if (typeof safeHideLoader === 'function') safeHideLoader();
+    });
+
+    // Global Image Error Capture (prevent broken image icons)
+    document.addEventListener('error', (e) => {
+      if (e.target && e.target.tagName === 'IMG') {
+        const img = e.target;
+        if (!img.dataset.hasFailed) {
+          img.dataset.hasFailed = 'true';
+          img.style.opacity = '0.85';
+          img.style.filter = 'grayscale(50%)';
+        }
+      }
+    }, true);
+  }
+
+  registerServiceWorker() {
+    if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch((err) => {
+          console.warn('[SW] Registration warning:', err);
+        });
+      });
+    }
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => new NetworkResilience());
+} else {
+  new NetworkResilience();
+}
+// --------------------------------------------- //
+// Site-Wide Network Resilience & Toast Widget End
+// --------------------------------------------- //
+
 // --------------------------------------------- //
 // Active Menu Link Highlighter End
 // --------------------------------------------- //

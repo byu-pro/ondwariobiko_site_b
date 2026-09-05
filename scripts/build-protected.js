@@ -201,7 +201,7 @@ function buildFile(file) {
   if (ext === ".js") {
     const js = fs.readFileSync(file, "utf8");
     if (relative === "js/app.js") {
-      copyFile(path.join(root, "js", "app.min.js"), "js/app.min.js");
+      writeFile("js/app.min.js", minifyJs(js));
     } else if (relative === "js/app.min.js") {
       return;
     } else if (relative.endsWith(".min.js")) {
