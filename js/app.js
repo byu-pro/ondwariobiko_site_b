@@ -1818,4 +1818,30 @@ if (document.readyState === 'loading') {
 }
 // --------------------------------------------- //
 // Smart Persistent 1-Hr Call Booking Banner End
+// --------------------------------------------- //
+
+// --------------------------------------------- //
+// Make Full Service Cards Clickable Start
+// --------------------------------------------- //
+function initServiceCardsFullClick() {
+  const serviceCards = document.querySelectorAll('.mxd-services-stack__inner, .stack-item');
+  serviceCards.forEach(card => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('a')) return;
+      const primaryLink = card.querySelector('.mxd-services-stack__controls a, a[href]');
+      if (primaryLink) {
+        primaryLink.click();
+      }
+    });
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initServiceCardsFullClick);
+} else {
+  initServiceCardsFullClick();
+}
+// --------------------------------------------- //
+// Make Full Service Cards Clickable End
 // --------------------------------------------- //

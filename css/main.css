@@ -19045,9 +19045,16 @@ form textarea:required:valid {
   height: 100%;
   padding: 2.6rem 3rem 0 3rem;
   z-index: 0;
+  cursor: pointer;
   -moz-border-radius: var(--_radius-l);
        border-radius: var(--_radius-l);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
 }
+
+.mxd-services-stack__inner:hover .mxd-services-stack__controls .btn {
+  transform: scale(1.1) rotate(45deg);
+}
+
 .mxd-services-stack__inner.radius-dark {
   -moz-border-radius: 3.6rem;
        border-radius: 3.6rem;
