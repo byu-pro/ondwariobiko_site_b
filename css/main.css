@@ -10900,6 +10900,24 @@ form textarea:required:valid {
   font: normal var(--fw-regular) 1.6rem/1.4 var(--_font-accent);
   color: var(--t-bright);
 }
+@keyframes pulse-live {
+  0% {
+    box-shadow: 0 0 0 0 rgba(161, 242, 30, 0.8);
+    transform: scale(0.95);
+    opacity: 1;
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(161, 242, 30, 0);
+    transform: scale(1.1);
+    opacity: 0.85;
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(161, 242, 30, 0);
+    transform: scale(0.95);
+    opacity: 1;
+  }
+}
+
 .mxd-hero__mark .mark-icon {
   display: -webkit-inline-box;
   display: -moz-inline-box;
@@ -10918,6 +10936,8 @@ form textarea:required:valid {
   -moz-border-radius: 50%;
        border-radius: 50%;
   background-color: #a1f21e;
+  -webkit-animation: pulse-live 2s infinite ease-in-out;
+          animation: pulse-live 2s infinite ease-in-out;
 }
 .mxd-hero__mark .mark-text {
   display: -webkit-inline-box;
