@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Offline Mode - Ondwari Obiko</title>
+    <meta name="description" content="You are currently offline. Ondwari Obiko - Digital Architect & Brand Engineer.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <link rel="icon" href="img/favicon/favicon.ico?v=2" sizes="any">
+    <link rel="icon" href="img/favicon/icon.svg?v=3" type="image/svg+xml">
+    <link rel="stylesheet" type="text/css" href="css/loaders/loader.css">
+    <link rel="stylesheet" type="text/css" href="css/plugins.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    
+    <style>
+      .offline-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem;
+        background-color: var(--_bg-base, #000);
+        color: var(--_text-base, #fff);
+      }
+      .offline-title {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 700;
+        margin-bottom: 1rem;
+        line-height: 1.1;
+      }
+      .offline-text {
+        font-size: 1.25rem;
+        max-width: 600px;
+        opacity: 0.8;
+        margin-bottom: 2rem;
+      }
+      .offline-btn {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        background: #ccff00;
+        color: #000;
+        font-weight: 600;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+      }
+      .offline-btn:hover {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="offline-container">
+      <h1 class="offline-title">You Are Offline</h1>
+      <p class="offline-text">It looks like you have lost internet connection. Don't worry, previously loaded pages remain available in your cache!</p>
+      <a href="index.html" class="offline-btn" onclick="window.location.reload(); return false;">Retry Connection</a>
+    </main>
+  </body>
+
+</html>

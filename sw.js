@@ -14,6 +14,7 @@ const CORE_ASSETS = [
   './project_a.html',
   './article_a.html',
   './404.html',
+  './offline.html',
   './css/loaders/loader.css',
   './css/plugins.css',
   './css/main.css',
@@ -71,7 +72,7 @@ self.addEventListener('fetch', (event) => {
         .catch(() => {
           return caches.match(request).then((cachedResponse) => {
             if (cachedResponse) return cachedResponse;
-            return caches.match('./index.html');
+            return caches.match('./offline.html');
           });
         })
     );
