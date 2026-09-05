@@ -2053,6 +2053,7 @@ if (document.readyState === 'loading') {
     initMagneticSpotlight();
     initPortfolioFiltering();
     initFaqSearchFilter();
+    initMenuOpenObserver();
   });
 } else {
   initCopyToClipboardToast();
@@ -2060,7 +2061,41 @@ if (document.readyState === 'loading') {
   initMagneticSpotlight();
   initPortfolioFiltering();
   initFaqSearchFilter();
+  initMenuOpenObserver();
 }
+
+// --------------------------------------------- //
+// Hide Banners & Floating UI when Menu is Open Start
+// --------------------------------------------- //
+function initMenuOpenObserver() {
+  function checkMenuState() {
+    const hamburger = document.querySelector('.mxd-nav__hamburger');
+    const isNavOpen = hamburger && (hamburger.classList.contains('nav-open') || hamburger.classList.contains('is-active'));
+    
+    if (isNavOpen) {
+      document.body.classList.add('menu-is-open');
+    } else {
+      document.body.classList.remove('menu-is-open');
+    }
+  }
+
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.mxd-nav__hamburger') || e.target.closest('.mxd-nav__wrap')) {
+      setTimeout(checkMenuState, 50);
+      setTimeout(checkMenuState, 300);
+      setTimeout(checkMenuState, 800);
+    }
+  });
+
+  const hamburger = document.querySelector('.mxd-nav__hamburger');
+  if (hamburger) {
+    const observer = new MutationObserver(checkMenuState);
+    observer.observe(hamburger, { attributes: true, attributeFilter: ['class'] });
+  }
+}
+// --------------------------------------------- //
+// Hide Banners & Floating UI when Menu is Open End
+// --------------------------------------------- //
 // --------------------------------------------- //
 // High-Impact Interactive Features End
 // --------------------------------------------- //

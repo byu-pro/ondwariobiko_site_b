@@ -22341,7 +22341,15 @@ form textarea:required:valid {
   pointer-events: none;
 }
 
-
-
-
-
+/* ------------------------------------------------*/
+/* 6. Navigation Menu Open State Suppressions      */
+/* ------------------------------------------------*/
+body.menu-is-open .floating-booking-banner,
+body.menu-is-open .floating-booking-pill,
+body.menu-is-open .btn-to-top {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(180%) !important;
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease !important;
+}
