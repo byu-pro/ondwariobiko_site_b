@@ -1,0 +1,9 @@
+{
+  "name": "ondwariobiko-site-b",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static portfolio site for Ondwari Obiko.",
+  "scripts": {
+    "build": "node scripts/build-protected.js"
+  }
+}
