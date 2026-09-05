@@ -88,69 +88,12 @@ function minifyCss(css) {
     .trim();
 }
 
-function stripJsComments(js) {
-  let output = "";
-  let state = "code";
-
-  for (let i = 0; i < js.length; i += 1) {
-    const char = js[i];
-    const next = js[i + 1];
-    const prev = js[i - 1];
-
-    if (state === "line-comment") {
-      if (char === "\n") {
-        output += "\n";
-        state = "code";
-      }
-      continue;
-    }
-
-    if (state === "block-comment") {
-      if (char === "*" && next === "/") {
-        i += 1;
-        state = "code";
-      }
-      continue;
-    }
-
-    if (state === "single" || state === "double" || state === "template") {
-      output += char;
-      if (char === "\\" && next) {
-        output += next;
-        i += 1;
-        continue;
-      }
-      if (state === "single" && char === "'") state = "code";
-      if (state === "double" && char === "\"") state = "code";
-      if (state === "template" && char === "`") state = "code";
-      continue;
-    }
-
-    if (char === "/" && next === "/") {
-      state = "line-comment";
-      i += 1;
-      continue;
-    }
-
-    if (char === "/" && next === "*") {
-      state = "block-comment";
-      i += 1;
-      continue;
-    }
-
-    if (char === "'" && prev !== "\\") state = "single";
-    if (char === "\"" && prev !== "\\") state = "double";
-    if (char === "`" && prev !== "\\") state = "template";
-    output += char;
-  }
-
-  return output;
-}
-
 function minifyJs(js) {
-  return stripJsComments(js)
-    .replace(/\s+/g, " ")
-    .trim();
+  // Safely strip block comments /* ... */
+  let output = js.replace(/\/\*[\s\S]*?\*\//g, "");
+  // Safely strip standalone line comments starting with //
+  output = output.replace(/^[ \t]*\/\/[^\r\n]*/gm, "");
+  return output.trim();
 }
 
 function rewriteHtmlReferences(html) {
