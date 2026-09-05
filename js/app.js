@@ -68,6 +68,10 @@ const fadeInItems = document.querySelectorAll('.loading__fade');
 
 let loaderDismissed = false;
 
+// Check session navigation to skip preloader delay on internal page navigation
+const isSubsequentNavigation = sessionStorage.getItem('ondwari_visited') === 'true';
+sessionStorage.setItem('ondwari_visited', 'true');
+
 function safeHideLoader() {
   if (loaderDismissed) return;
   loaderDismissed = true;
@@ -84,28 +88,36 @@ function safeHideLoader() {
 function startLoader() {
   let counterElement = document.querySelector(".loader__count .count__text");
   if (!counterElement) return;
+
+  if (isSubsequentNavigation) {
+    safeHideLoader();
+    return;
+  }
+
   let currentValue = 0;
   function updateCounter() {
     if (loaderDismissed) return;
     if (currentValue < 100) {
-      let increment = Math.floor(Math.random() * 10) + 1;
+      let increment = Math.floor(Math.random() * 25) + 15;
       currentValue = Math.min(currentValue + increment, 100);
       counterElement.textContent = currentValue;
       if (currentValue === 100) {
         let loaderCount = document.querySelector(".loader__count");
         if (loaderCount) loaderCount.classList.add("is-complete");
-        gsap.to(".loader__count span", { color: "#ccff00", duration: 0.3, ease: 'power2.out' });
+        gsap.to(".loader__count span", { color: "#ccff00", duration: 0.15, ease: 'power2.out' });
+        safeHideLoader();
+      } else {
+        let delay = Math.floor(Math.random() * 15) + 10;
+        setTimeout(updateCounter, delay);
       }
-      let delay = Math.floor(Math.random() * 120) + 25;
-      setTimeout(updateCounter, delay);
     }
   }
   updateCounter();
 }
 startLoader();
 
-// Hard safety timer (2.8s) to guarantee loader fades out even on slow network or missing images
-const LOADER_TIMEOUT_MS = 2800;
+// Fast failsafe timer (600ms max) to guarantee instant content display
+const LOADER_TIMEOUT_MS = isSubsequentNavigation ? 50 : 600;
 const loaderFailsafeTimer = setTimeout(() => {
   safeHideLoader();
 }, LOADER_TIMEOUT_MS);
@@ -121,30 +133,37 @@ imgLoad.on('fail', instance => {
 });
 
 function hideLoader() {
-  gsap.to(".loader__count", { duration: 0.8, ease: 'power2.in', y: "100%", delay: 0.2 });
-  gsap.to(".loader__wrapper", { duration: 0.8, ease: 'power4.in', y: "-100%", delay: 0.5 });
+  const duration = isSubsequentNavigation ? 0.2 : 0.35;
+  gsap.to(".loader__count", { duration: duration, ease: 'power2.in', y: "100%", delay: 0 });
+  gsap.to(".loader__wrapper", { duration: duration, ease: 'power4.in', y: "-100%", delay: 0.08 });
   setTimeout(() => {
     let loaderEl = document.getElementById("loader");
     if (loaderEl) loaderEl.classList.add("loaded");
-  }, 1400);
+  }, isSubsequentNavigation ? 200 : 400);
 }
 
 function pageAppearance() {
+  const delay = isSubsequentNavigation ? 0.05 : 0.12;
   if (loadingItems && loadingItems.length > 0) {
     gsap.set(loadingItems, { opacity: 0 });
     gsap.to(loadingItems, { 
-      duration: 1.1,
-      ease: 'power4',
-      startAt: {y: 120},
+      duration: 0.5,
+      ease: 'power3.out',
+      startAt: {y: 40},
       y: 0,
       opacity: 1,
-      delay: 0.4,
-      stagger: 0.08
+      delay: delay,
+      stagger: 0.03
     });
   }
   if (fadeInItems && fadeInItems.length > 0) {
     gsap.set(fadeInItems, { opacity: 0 });
-    gsap.to(fadeInItems, { duration: 0.8, ease: 'none', opacity: 1, delay: 0.6 });
+    gsap.to(fadeInItems, { 
+      duration: 0.3,
+      ease: 'none',
+      opacity: 1,
+      delay: delay + 0.05
+    });
   }
 }
 // --------------------------------------------- //
