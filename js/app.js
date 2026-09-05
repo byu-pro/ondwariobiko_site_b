@@ -1738,3 +1738,70 @@ if (document.readyState === 'loading') {
 // --------------------------------------------- //
 // Active Menu Link Highlighter End
 // --------------------------------------------- //
+
+// --------------------------------------------- //
+// Smart Floating 1-Hr Call Booking Banner Start
+// --------------------------------------------- //
+function initFloatingBookingBanner() {
+  if (sessionStorage.getItem('booking_banner_closed') === 'true') return;
+
+  const whatsappUrl = "https://wa.me/254702255575?text=Hi%20Ondwari,%20I'd%20like%20to%20book%20a%20free%201-hour%20project%20strategy%20call.";
+  const mailtoUrl = "mailto:ondwariobiko@gmail.com?subject=Free%201-Hour%20Strategy%20Call%20Booking&body=Hi%20Ondwari,%20I'm%20interested%20in%20booking%20a%20free%201-hour%20discovery%20call.";
+
+  const banner = document.createElement('div');
+  banner.className = 'floating-booking-banner';
+  banner.innerHTML = `
+    <div class="booking-banner__header">
+      <div class="booking-banner__status">
+        <span class="booking-banner__dot"></span>
+        <span>Free Discovery Call</span>
+      </div>
+      <button class="booking-banner__close" type="button" aria-label="Dismiss Banner">&times;</button>
+    </div>
+    <h4 class="booking-banner__title">Have a project in mind?</h4>
+    <p class="booking-banner__text">Book a free 1-hour strategy call to discuss your brand or web project.</p>
+    <div class="booking-banner__actions">
+      <a href="${whatsappUrl}" target="_blank" rel="noopener" class="booking-banner__btn booking-banner__btn--primary">
+        <i class="ph-bold ph-whatsapp-logo"></i> WhatsApp
+      </a>
+      <a href="${mailtoUrl}" class="booking-banner__btn booking-banner__btn--secondary">
+        <i class="ph-bold ph-envelope-simple"></i> Email
+      </a>
+    </div>
+  `;
+
+  document.body.appendChild(banner);
+
+  const closeBtn = banner.querySelector('.booking-banner__close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      banner.classList.remove('is-visible');
+      sessionStorage.setItem('booking_banner_closed', 'true');
+    });
+  }
+
+  let bannerTriggered = false;
+  function triggerBanner() {
+    if (bannerTriggered) return;
+    bannerTriggered = true;
+    banner.classList.add('is-visible');
+  }
+
+  setTimeout(triggerBanner, 5000);
+
+  window.addEventListener('scroll', () => {
+    const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    if (scrollPercent > 20) {
+      triggerBanner();
+    }
+  }, { passive: true });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initFloatingBookingBanner);
+} else {
+  initFloatingBookingBanner();
+}
+// --------------------------------------------- //
+// Smart Floating 1-Hr Call Booking Banner End
+// --------------------------------------------- //

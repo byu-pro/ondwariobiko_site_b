@@ -13,7 +13,7 @@ if (!empty($_POST['website_hp'])) {
 }
 
 // Hardcoded recipient email address to prevent Open Mail Relay vulnerabilities
-$admin_email = 'contact@ondwariobiko.com';
+$admin_email = 'ondwariobiko@gmail.com';
 
 // Sanitize project name and form subject
 $project_name_raw = isset($_POST['project_name']) ? $_POST['project_name'] : 'Ondwari Obiko Portfolio';
