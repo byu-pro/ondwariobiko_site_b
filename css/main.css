@@ -21859,10 +21859,12 @@ form textarea:required:valid {
 .floating-booking-banner {
   position: fixed;
   bottom: 90px;
-  right: 24px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   z-index: 9999;
   max-width: 440px;
-  width: calc(100% - 48px);
+  width: calc(100% - 32px);
   background: rgba(16, 16, 16, 0.96);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -21986,7 +21988,11 @@ form textarea:required:valid {
 .floating-booking-pill {
   position: fixed;
   bottom: 90px;
-  right: 24px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: fit-content;
+  max-width: calc(100% - 32px);
   z-index: 9998;
   display: inline-flex;
   align-items: center;
@@ -22023,11 +22029,17 @@ form textarea:required:valid {
 @media only screen and (min-width: 768px) {
   .floating-booking-banner {
     bottom: 105px;
+    left: auto;
     right: 48px;
+    margin: 0;
+    width: calc(100% - 48px);
   }
   .floating-booking-pill {
     bottom: 105px;
+    left: auto;
     right: 48px;
+    margin: 0;
+    width: auto;
   }
 }
 
@@ -22045,14 +22057,25 @@ form textarea:required:valid {
 @media (max-width: 480px) {
   .floating-booking-banner {
     bottom: 85px;
-    right: 16px;
-    left: 16px;
-    width: auto;
+    left: 12px;
+    right: 12px;
+    margin: 0 auto;
+    width: calc(100% - 24px);
     padding: 20px 18px;
+  }
+  .floating-booking-pill {
+    bottom: 85px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
   .booking-banner__title {
     font-size: 1.25rem;
   }
+  .booking-banner__text {
+    font-size: 0.98rem;
+  }
+}
   .booking-banner__text {
     font-size: 0.95rem;
   }
