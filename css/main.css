@@ -21858,7 +21858,7 @@ form textarea:required:valid {
 
 .floating-booking-banner {
   position: fixed;
-  bottom: 90px;
+  bottom: 24px;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -21987,7 +21987,7 @@ form textarea:required:valid {
 
 .floating-booking-pill {
   position: fixed;
-  bottom: 90px;
+  bottom: 24px;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -22056,7 +22056,7 @@ form textarea:required:valid {
 
 @media (max-width: 480px) {
   .floating-booking-banner {
-    bottom: 85px;
+    bottom: 20px;
     left: 12px;
     right: 12px;
     margin: 0 auto;
@@ -22064,7 +22064,7 @@ form textarea:required:valid {
     padding: 20px 18px;
   }
   .floating-booking-pill {
-    bottom: 85px;
+    bottom: 20px;
     left: 0;
     right: 0;
     margin: 0 auto;
