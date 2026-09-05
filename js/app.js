@@ -1740,14 +1740,13 @@ if (document.readyState === 'loading') {
 // --------------------------------------------- //
 
 // --------------------------------------------- //
-// Smart Floating 1-Hr Call Booking Banner Start
+// Smart Persistent 1-Hr Call Booking Banner Start
 // --------------------------------------------- //
 function initFloatingBookingBanner() {
-  if (sessionStorage.getItem('booking_banner_closed') === 'true') return;
-
   const whatsappUrl = "https://wa.me/254702255575?text=Hi%20Ondwari,%20I'd%20like%20to%20book%20a%20free%201-hour%20project%20strategy%20call.";
   const mailtoUrl = "mailto:ondwariobiko@gmail.com?subject=Free%201-Hour%20Strategy%20Call%20Booking&body=Hi%20Ondwari,%20I'm%20interested%20in%20booking%20a%20free%201-hour%20discovery%20call.";
 
+  // 1. Create Main Banner Card
   const banner = document.createElement('div');
   banner.className = 'floating-booking-banner';
   banner.innerHTML = `
@@ -1756,7 +1755,7 @@ function initFloatingBookingBanner() {
         <span class="booking-banner__dot"></span>
         <span>Free Discovery Call</span>
       </div>
-      <button class="booking-banner__close" type="button" aria-label="Dismiss Banner">&times;</button>
+      <button class="booking-banner__close" type="button" aria-label="Minimize Banner">&times;</button>
     </div>
     <h4 class="booking-banner__title">Have a project in mind?</h4>
     <p class="booking-banner__text">Book a free 1-hour strategy call to discuss your brand or web project.</p>
@@ -1770,29 +1769,44 @@ function initFloatingBookingBanner() {
     </div>
   `;
 
+  // 2. Create Persistent Collapsed Pill Badge
+  const pill = document.createElement('button');
+  pill.type = 'button';
+  pill.className = 'floating-booking-pill';
+  pill.innerHTML = `
+    <span class="booking-banner__dot"></span>
+    <span>Book 1-Hr Free Call</span>
+  `;
+
   document.body.appendChild(banner);
+  document.body.appendChild(pill);
 
   const closeBtn = banner.querySelector('.booking-banner__close');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      banner.classList.remove('is-visible');
-      sessionStorage.setItem('booking_banner_closed', 'true');
-    });
-  }
 
-  let bannerTriggered = false;
-  function triggerBanner() {
-    if (bannerTriggered) return;
-    bannerTriggered = true;
+  function showFullBanner() {
+    pill.classList.remove('is-visible');
     banner.classList.add('is-visible');
   }
 
-  setTimeout(triggerBanner, 5000);
+  function collapseToPill() {
+    banner.classList.remove('is-visible');
+    pill.classList.add('is-visible');
+  }
 
+  if (closeBtn) {
+    closeBtn.addEventListener('click', collapseToPill);
+  }
+
+  pill.addEventListener('click', showFullBanner);
+
+  // Trigger full banner after 1.5 seconds on every page load
+  setTimeout(showFullBanner, 1500);
+
+  // Or trigger immediately on 5% scroll
   window.addEventListener('scroll', () => {
     const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-    if (scrollPercent > 20) {
-      triggerBanner();
+    if (scrollPercent > 5 && !pill.classList.contains('is-visible')) {
+      showFullBanner();
     }
   }, { passive: true });
 }
@@ -1803,5 +1817,5 @@ if (document.readyState === 'loading') {
   initFloatingBookingBanner();
 }
 // --------------------------------------------- //
-// Smart Floating 1-Hr Call Booking Banner End
+// Smart Persistent 1-Hr Call Booking Banner End
 // --------------------------------------------- //
