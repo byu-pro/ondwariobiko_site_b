@@ -526,9 +526,13 @@ $(function() {
         if (open) {
           tl.play();
           hamburgerEl.addClass("nav-open");
+          document.body.classList.add("menu-is-open");
+          setFloatingWidgetsState(false);
         } else {
           tl.reverse();
           hamburgerEl.removeClass("nav-open");
+          document.body.classList.remove("menu-is-open");
+          setFloatingWidgetsState(true);
         }
       }
     }
@@ -2064,6 +2068,28 @@ if (document.readyState === 'loading') {
   initMenuOpenObserver();
 }
 
+function setFloatingWidgetsState(visible) {
+  const banner = document.querySelector('.floating-booking-banner');
+  const pill = document.querySelector('.floating-booking-pill');
+  const toTop = document.querySelector('.btn-to-top');
+
+  [banner, pill, toTop].forEach(el => {
+    if (el) {
+      if (!visible) {
+        el.style.setProperty('display', 'none', 'important');
+        el.style.setProperty('opacity', '0', 'important');
+        el.style.setProperty('visibility', 'hidden', 'important');
+        el.style.setProperty('pointer-events', 'none', 'important');
+      } else {
+        el.style.removeProperty('display');
+        el.style.removeProperty('opacity');
+        el.style.removeProperty('visibility');
+        el.style.removeProperty('pointer-events');
+      }
+    }
+  });
+}
+
 // --------------------------------------------- //
 // Hide Banners & Floating UI when Menu is Open Start
 // --------------------------------------------- //
@@ -2071,40 +2097,57 @@ function initMenuOpenObserver() {
   function checkMenuState() {
     const hamburger = document.querySelector('.mxd-nav__hamburger');
     const header = document.querySelector('.mxd-header');
+    const menuWrap = document.querySelector('.mxd-menu__wrapper');
+
+    const isWrapperVisible = menuWrap && (
+      window.getComputedStyle(menuWrap).display !== 'none' ||
+      menuWrap.style.display === 'flex' ||
+      (menuWrap.offsetHeight > 0 && menuWrap.offsetWidth > 0)
+    );
+
     const isNavOpen = (hamburger && (hamburger.classList.contains('nav-open') || hamburger.classList.contains('is-active'))) ||
-                      (header && header.classList.contains('menu-is-visible'));
+                      (header && header.classList.contains('menu-is-visible')) ||
+                      isWrapperVisible;
     
     if (isNavOpen) {
       document.body.classList.add('menu-is-open');
+      setFloatingWidgetsState(false);
     } else {
       document.body.classList.remove('menu-is-open');
+      setFloatingWidgetsState(true);
     }
   }
 
   checkMenuState();
 
   document.addEventListener('click', (e) => {
-    if (e.target.closest('.mxd-nav__hamburger') || e.target.closest('.mxd-nav__wrap')) {
-      setTimeout(checkMenuState, 20);
-      setTimeout(checkMenuState, 150);
-      setTimeout(checkMenuState, 400);
-      setTimeout(checkMenuState, 800);
+    if (e.target.closest('.mxd-nav__hamburger') || e.target.closest('.mxd-nav__wrap') || e.target.closest('.mxd-menu__wrapper')) {
+      setTimeout(checkMenuState, 10);
+      setTimeout(checkMenuState, 100);
+      setTimeout(checkMenuState, 300);
+      setTimeout(checkMenuState, 600);
     }
   });
 
   const hamburger = document.querySelector('.mxd-nav__hamburger');
   if (hamburger) {
     const observer = new MutationObserver(checkMenuState);
-    observer.observe(hamburger, { attributes: true, attributeFilter: ['class'] });
+    observer.observe(hamburger, { attributes: true, attributeFilter: ['class', 'style'] });
   }
 
   const header = document.querySelector('.mxd-header');
   if (header) {
     const observer = new MutationObserver(checkMenuState);
-    observer.observe(header, { attributes: true, attributeFilter: ['class'] });
+    observer.observe(header, { attributes: true, attributeFilter: ['class', 'style'] });
   }
 
-  setInterval(checkMenuState, 300);
+  const menuWrap = document.querySelector('.mxd-menu__wrapper');
+  if (menuWrap) {
+    const observer = new MutationObserver(checkMenuState);
+    observer.observe(menuWrap, { attributes: true, attributeFilter: ['class', 'style'] });
+  }
+
+  setInterval(checkMenuState, 200);
 }
 // --------------------------------------------- //
 // Hide Banners & Floating UI when Menu is Open End

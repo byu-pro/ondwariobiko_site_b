@@ -22352,10 +22352,17 @@ body:has(.nav-open) .floating-booking-pill,
 body:has(.nav-open) .btn-to-top,
 body:has(.menu-is-visible) .floating-booking-banner,
 body:has(.menu-is-visible) .floating-booking-pill,
-body:has(.menu-is-visible) .btn-to-top {
+body:has(.menu-is-visible) .btn-to-top,
+body:has(.mxd-menu__wrapper[style*="display: flex"]) .floating-booking-banner,
+body:has(.mxd-menu__wrapper[style*="display: flex"]) .floating-booking-pill,
+body:has(.mxd-menu__wrapper[style*="display: flex"]) .btn-to-top,
+body:has(.mxd-menu__wrapper:not([style*="display: none"])) .floating-booking-banner,
+body:has(.mxd-menu__wrapper:not([style*="display: none"])) .floating-booking-pill,
+body:has(.mxd-menu__wrapper:not([style*="display: none"])) .btn-to-top {
+  display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
   transform: translateY(180%) !important;
-  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease !important;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease !important;
 }
