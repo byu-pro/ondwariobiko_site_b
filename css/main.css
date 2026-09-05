@@ -22346,7 +22346,13 @@ form textarea:required:valid {
 /* ------------------------------------------------*/
 body.menu-is-open .floating-booking-banner,
 body.menu-is-open .floating-booking-pill,
-body.menu-is-open .btn-to-top {
+body.menu-is-open .btn-to-top,
+body:has(.nav-open) .floating-booking-banner,
+body:has(.nav-open) .floating-booking-pill,
+body:has(.nav-open) .btn-to-top,
+body:has(.menu-is-visible) .floating-booking-banner,
+body:has(.menu-is-visible) .floating-booking-pill,
+body:has(.menu-is-visible) .btn-to-top {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;

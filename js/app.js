@@ -2070,7 +2070,9 @@ if (document.readyState === 'loading') {
 function initMenuOpenObserver() {
   function checkMenuState() {
     const hamburger = document.querySelector('.mxd-nav__hamburger');
-    const isNavOpen = hamburger && (hamburger.classList.contains('nav-open') || hamburger.classList.contains('is-active'));
+    const header = document.querySelector('.mxd-header');
+    const isNavOpen = (hamburger && (hamburger.classList.contains('nav-open') || hamburger.classList.contains('is-active'))) ||
+                      (header && header.classList.contains('menu-is-visible'));
     
     if (isNavOpen) {
       document.body.classList.add('menu-is-open');
@@ -2079,10 +2081,13 @@ function initMenuOpenObserver() {
     }
   }
 
+  checkMenuState();
+
   document.addEventListener('click', (e) => {
     if (e.target.closest('.mxd-nav__hamburger') || e.target.closest('.mxd-nav__wrap')) {
-      setTimeout(checkMenuState, 50);
-      setTimeout(checkMenuState, 300);
+      setTimeout(checkMenuState, 20);
+      setTimeout(checkMenuState, 150);
+      setTimeout(checkMenuState, 400);
       setTimeout(checkMenuState, 800);
     }
   });
@@ -2092,6 +2097,14 @@ function initMenuOpenObserver() {
     const observer = new MutationObserver(checkMenuState);
     observer.observe(hamburger, { attributes: true, attributeFilter: ['class'] });
   }
+
+  const header = document.querySelector('.mxd-header');
+  if (header) {
+    const observer = new MutationObserver(checkMenuState);
+    observer.observe(header, { attributes: true, attributeFilter: ['class'] });
+  }
+
+  setInterval(checkMenuState, 300);
 }
 // --------------------------------------------- //
 // Hide Banners & Floating UI when Menu is Open End
