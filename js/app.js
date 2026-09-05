@@ -1747,6 +1747,11 @@ if (document.readyState === 'loading') {
 // Smart Persistent 1-Hr Call Booking Banner Start
 // --------------------------------------------- //
 function initFloatingBookingBanner() {
+  const path = window.location.pathname.toLowerCase();
+  if (path.includes('contact.html') || path.endsWith('/contact') || path.endsWith('/contact/') || document.querySelector('#contact-form')) {
+    return;
+  }
+
   const whatsappUrl = "https://wa.me/254702255575?text=Hi%20Ondwari,%20I'd%20like%20to%20book%20a%20free%201-hour%20project%20strategy%20call.";
   const mailtoUrl = "mailto:ondwariobiko@gmail.com?subject=Free%201-Hour%20Strategy%20Call%20Booking&body=Hi%20Ondwari,%20I'm%20interested%20in%20booking%20a%20free%201-hour%20discovery%20call.";
 
