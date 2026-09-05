@@ -21858,12 +21858,12 @@ form textarea:required:valid {
 
 .floating-booking-banner {
   position: fixed;
-  bottom: 24px;
+  bottom: 90px;
   right: 24px;
   z-index: 9999;
   max-width: 380px;
   width: calc(100% - 48px);
-  background: rgba(18, 18, 18, 0.92);
+  background: rgba(18, 18, 18, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -21984,7 +21984,7 @@ form textarea:required:valid {
 
 .floating-booking-pill {
   position: fixed;
-  bottom: 24px;
+  bottom: 90px;
   right: 24px;
   z-index: 9998;
   display: inline-flex;
@@ -22019,18 +22019,41 @@ form textarea:required:valid {
   border-color: #ccff00;
 }
 
+@media only screen and (min-width: 768px) {
+  .floating-booking-banner {
+    bottom: 105px;
+    right: 48px;
+  }
+  .floating-booking-pill {
+    bottom: 105px;
+    right: 48px;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .floating-booking-banner {
+    bottom: 115px;
+    right: 60px;
+  }
+  .floating-booking-pill {
+    bottom: 115px;
+    right: 60px;
+  }
+}
+
 @media (max-width: 480px) {
   .floating-booking-banner {
-    bottom: 16px;
+    bottom: 85px;
     right: 16px;
     left: 16px;
     width: auto;
   }
   .floating-booking-pill {
-    bottom: 16px;
+    bottom: 85px;
     right: 16px;
   }
 }
+
 
 
 
