@@ -1844,4 +1844,223 @@ if (document.readyState === 'loading') {
 }
 // --------------------------------------------- //
 // Make Full Service Cards Clickable End
+// --------------------------------------------- //
+
+// --------------------------------------------- //
+// 1. Copy-to-Clipboard Toast Widget Start
+// --------------------------------------------- //
+function initCopyToClipboardToast() {
+  let toast = document.getElementById('copy-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'copy-toast';
+    toast.className = 'copy-toast';
+    document.body.appendChild(toast);
+  }
+
+  let toastTimer;
+  function showToast(msg) {
+    toast.innerHTML = `<i class="ph-bold ph-check-circle"></i> <span>${msg}</span>`;
+    toast.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('is-visible');
+    }, 2800);
+  }
+
+  document.querySelectorAll('a[href^="mailto:"], a[href^="tel:"], [data-copy]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      let copyText = el.getAttribute('data-copy');
+      const href = el.getAttribute('href') || '';
+      
+      if (!copyText) {
+        if (href.startsWith('mailto:')) {
+          copyText = href.replace('mailto:', '').split('?')[0];
+        } else if (href.startsWith('tel:')) {
+          copyText = href.replace('tel:', '');
+        }
+      }
+
+      if (copyText) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(copyText).then(() => {
+            showToast(`Copied to clipboard: <strong>${copyText}</strong>`);
+          }).catch(() => {});
+        } else {
+          const tempInput = document.createElement('input');
+          tempInput.value = copyText;
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+          showToast(`Copied to clipboard: <strong>${copyText}</strong>`);
+        }
+      }
+    });
+  });
+}
+
+// --------------------------------------------- //
+// 2. Interactive Project Scope Calculator Start
+// --------------------------------------------- //
+function initProjectScopeCalculator() {
+  const container = document.getElementById('project-scope-calculator');
+  if (!container) return;
+
+  const checkboxes = container.querySelectorAll('.calc-checkbox');
+  const minPriceEl = container.querySelector('.calc-min-price');
+  const maxPriceEl = container.querySelector('.calc-max-price');
+  const timeEl = container.querySelector('.calc-timeline');
+  const whatsappBtn = container.querySelector('.calc-btn-whatsapp');
+  const emailBtn = container.querySelector('.calc-btn-email');
+
+  function calculate() {
+    let minBudget = 0;
+    let maxBudget = 0;
+    let maxWeeks = 0;
+    const selectedLabels = [];
+
+    checkboxes.forEach(cb => {
+      if (cb.checked) {
+        const min = parseInt(cb.getAttribute('data-min') || '0', 10);
+        const max = parseInt(cb.getAttribute('data-max') || '0', 10);
+        const weeks = parseInt(cb.getAttribute('data-weeks') || '0', 10);
+        const label = cb.getAttribute('data-label') || cb.value;
+
+        minBudget += min;
+        maxBudget += max;
+        maxWeeks = Math.max(maxWeeks, maxWeeks + weeks);
+        selectedLabels.push(label);
+      }
+    });
+
+    if (minBudget === 0) {
+      if (minPriceEl) minPriceEl.textContent = '$0';
+      if (maxPriceEl) maxPriceEl.textContent = '$0';
+      if (timeEl) timeEl.textContent = '0 Weeks';
+    } else {
+      if (minPriceEl) minPriceEl.textContent = `$${minBudget.toLocaleString()}`;
+      if (maxPriceEl) maxPriceEl.textContent = `$${maxBudget.toLocaleString()}`;
+      if (timeEl) timeEl.textContent = `${Math.ceil(maxWeeks * 0.75)} - ${maxWeeks} Weeks`;
+    }
+
+    const scopeStr = selectedLabels.length ? selectedLabels.join(', ') : 'Custom Project';
+    const msg = `Hi Ondwari, I calculated my project scope on your site: [${scopeStr}]. Estimated range: $${minBudget}-$${maxBudget}. I'd like to book a 1-hour strategy call to discuss.`;
+
+    if (whatsappBtn) {
+      whatsappBtn.href = `https://wa.me/254702255575?text=${encodeURIComponent(msg)}`;
+    }
+    if (emailBtn) {
+      emailBtn.href = `mailto:ondwariobiko@gmail.com?subject=${encodeURIComponent('Project Scope Consultation')}&body=${encodeURIComponent(msg)}`;
+    }
+  }
+
+  checkboxes.forEach(cb => cb.addEventListener('change', calculate));
+  calculate();
+}
+
+// --------------------------------------------- //
+// 3. Magnetic Spotlight Cursor Effect Start
+// --------------------------------------------- //
+function initMagneticSpotlight() {
+  if (window.innerWidth < 992 || 'ontouchstart' in window) return;
+
+  const spotlight = document.createElement('div');
+  spotlight.className = 'cursor-spotlight';
+  document.body.appendChild(spotlight);
+
+  let mouseX = -100, mouseY = -100;
+  let spotX = -100, spotY = -100;
+
+  window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  }, { passive: true });
+
+  function renderSpotlight() {
+    spotX += (mouseX - spotX) * 0.15;
+    spotY += (mouseY - spotY) * 0.15;
+    spotlight.style.transform = `translate3d(${spotX}px, ${spotY}px, 0)`;
+    requestAnimationFrame(renderSpotlight);
+  }
+  requestAnimationFrame(renderSpotlight);
+}
+
+// --------------------------------------------- //
+// 4. Portfolio Category Filtering Start
+// --------------------------------------------- //
+function initPortfolioFiltering() {
+  const filterPills = document.querySelectorAll('.portfolio-filter-pill');
+  const projectItems = document.querySelectorAll('.portfolio-grid-item');
+  if (!filterPills.length || !projectItems.length) return;
+
+  filterPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const filter = pill.getAttribute('data-filter');
+
+      filterPills.forEach(p => p.classList.remove('is-active'));
+      pill.classList.add('is-active');
+
+      projectItems.forEach(item => {
+        const category = item.getAttribute('data-category') || '';
+        if (filter === 'all' || category.includes(filter)) {
+          item.style.display = '';
+          setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1)';
+          }, 50);
+        } else {
+          item.style.opacity = '0';
+          item.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            item.style.display = 'none';
+          }, 300);
+        }
+      });
+    });
+  });
+}
+
+// --------------------------------------------- //
+// 5. Searchable FAQ Accordion Start
+// --------------------------------------------- //
+function initFaqSearchFilter() {
+  const searchInput = document.getElementById('faq-search-input');
+  const faqItems = document.querySelectorAll('.mxd-accordion__item, .faq-accordion-item');
+  if (!searchInput || !faqItems.length) return;
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase().trim();
+    let matches = 0;
+
+    faqItems.forEach(item => {
+      const text = item.textContent.toLowerCase();
+      if (!query || text.includes(query)) {
+        item.style.display = '';
+        matches++;
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+}
+
+// Initialize all features
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    initCopyToClipboardToast();
+    initProjectScopeCalculator();
+    initMagneticSpotlight();
+    initPortfolioFiltering();
+    initFaqSearchFilter();
+  });
+} else {
+  initCopyToClipboardToast();
+  initProjectScopeCalculator();
+  initMagneticSpotlight();
+  initPortfolioFiltering();
+  initFaqSearchFilter();
+}
+// --------------------------------------------- //
+// High-Impact Interactive Features End
 // --------------------------------------------- //

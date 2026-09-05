@@ -22114,6 +22114,229 @@ form textarea:required:valid {
   .booking-banner__text {
     font-size: 0.98rem;
   }
+/* ------------------------------------------------*/
+/* 1. Copy-to-Clipboard Floating Toast Widget       */
+/* ------------------------------------------------*/
+.copy-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  z-index: 10000;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: rgba(16, 16, 16, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid #ccff00;
+  border-radius: 100px;
+  color: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 600;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(204, 255, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.3s;
+}
+
+.copy-toast.is-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.copy-toast i {
+  color: #ccff00;
+  font-size: 1.25rem;
+}
+
+.copy-toast strong {
+  color: #ccff00;
+}
+
+/* ------------------------------------------------*/
+/* 2. Magnetic Spotlight Cursor Trail              */
+/* ------------------------------------------------*/
+.cursor-spotlight {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 320px;
+  margin-top: -160px;
+  margin-left: -160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(204, 255, 0, 0.12) 0%, rgba(204, 255, 0, 0.03) 40%, rgba(0, 0, 0, 0) 70%);
+  pointer-events: none;
+  z-index: 9990;
+  will-change: transform;
+}
+
+/* ------------------------------------------------*/
+/* 3. Interactive Project Scope Calculator         */
+/* ------------------------------------------------*/
+.scope-calculator-card {
+  background: rgba(22, 22, 22, 0.9);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  border-radius: 28px;
+  padding: 36px 32px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.scope-calculator-card h3 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.calc-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 24px 0 32px;
+}
+
+.calc-option-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.calc-option-label:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(204, 255, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.calc-option-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #ccff00;
+  cursor: pointer;
+}
+
+.calc-option-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  display: block;
+}
+
+.calc-option-price {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.calc-summary-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 28px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1.5px solid rgba(204, 255, 0, 0.4);
+  border-radius: 20px;
+}
+
+.calc-summary-stat label {
+  display: block;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 4px;
+}
+
+.calc-summary-stat val {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ccff00;
+  font-style: normal;
+}
+
+.calc-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* ------------------------------------------------*/
+/* 4. Portfolio Filter Pills                       */
+/* ------------------------------------------------*/
+.portfolio-filter-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.portfolio-filter-pill {
+  padding: 10px 22px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 100px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.portfolio-filter-pill:hover,
+.portfolio-filter-pill.is-active {
+  background: #ccff00;
+  color: #000000;
+  border-color: #ccff00;
+  box-shadow: 0 0 16px rgba(204, 255, 0, 0.4);
+}
+
+/* ------------------------------------------------*/
+/* 5. Searchable FAQ Input                          */
+/* ------------------------------------------------*/
+.faq-search-wrapper {
+  position: relative;
+  max-width: 540px;
+  margin: 0 auto 36px;
+}
+
+.faq-search-input {
+  width: 100%;
+  padding: 16px 24px 16px 52px;
+  background: rgba(16, 16, 16, 0.9);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 100px;
+  color: #ffffff;
+  font-size: 1.05rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faq-search-input:focus {
+  border-color: #ccff00;
+  box-shadow: 0 0 20px rgba(204, 255, 0, 0.25);
+}
+
+.faq-search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.3rem;
+  pointer-events: none;
 }
 
 
