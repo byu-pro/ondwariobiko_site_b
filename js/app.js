@@ -2071,9 +2071,8 @@ if (document.readyState === 'loading') {
 function setFloatingWidgetsState(visible) {
   const banner = document.querySelector('.floating-booking-banner');
   const pill = document.querySelector('.floating-booking-pill');
-  const toTop = document.querySelector('.btn-to-top');
 
-  [banner, pill, toTop].forEach(el => {
+  [banner, pill].forEach(el => {
     if (el) {
       if (!visible) {
         el.style.setProperty('display', 'none', 'important');
