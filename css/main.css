@@ -2623,54 +2623,70 @@ p.t-semibold {
 
 .btn-to-top {
   position: fixed;
-  right: 3rem;
-  bottom: 3rem;
-  z-index: 99;
-  display: -webkit-inline-box;
-  display: -moz-inline-box;
-  display: -ms-inline-flexbox;
+  right: 18px;
+  bottom: 20px;
+  z-index: 999;
   display: inline-flex;
-  -webkit-box-align: center;
-     -moz-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  gap: 1rem;
-  font: normal var(--fw-medium) 1.8rem/1.2 var(--_font-accent);
-  color: var(--t-bright);
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(16, 16, 16, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
   text-decoration: none;
   cursor: pointer;
-  -webkit-transition: opacity 0.3s ease, visibility 0.3s ease, -webkit-transform var(--_animspeed-medium) var(--_animbezier);
-  transition: opacity 0.3s ease, visibility 0.3s ease, transform var(--_animspeed-medium) var(--_animbezier);
-  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
 }
+
 .btn-to-top i {
-  display: -webkit-inline-box;
-  display: -moz-inline-box;
-  display: -ms-inline-flexbox;
   display: inline-flex;
-  position: relative;
-  font-size: 2.2rem;
-  overflow: hidden;
+  font-size: 1.35rem;
+  transition: transform 0.3s ease;
 }
-.no-touch .btn-to-top:hover {
-  -webkit-transform: translateY(-4px);
-     -moz-transform: translateY(-4px);
-      -ms-transform: translateY(-4px);
-          transform: translateY(-4px);
+
+.btn-to-top .btn-caption {
+  display: none;
 }
+
+.no-touch .btn-to-top:hover,
+.btn-to-top:hover {
+  transform: translateY(-4px) scale(1.06);
+  background: #000000;
+  border-color: #ccff00;
+  color: #ccff00;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 20px rgba(204, 255, 0, 0.4);
+}
+
+.btn-to-top:hover i {
+  transform: translateY(-2px);
+}
+
 @media only screen and (min-width: 768px) {
   .btn-to-top {
-    right: 6rem;
-    bottom: 4rem;
-  }
-}
-@media only screen and (min-width: 1600px) {
-  .btn-to-top {
-    right: 9rem;
-    font-size: 2.2rem;
+    right: 36px;
+    bottom: 32px;
+    width: 52px;
+    height: 52px;
   }
   .btn-to-top i {
-    font-size: 2.6rem;
+    font-size: 1.45rem;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .btn-to-top {
+    right: 48px;
+    bottom: 40px;
+    width: 56px;
+    height: 56px;
+  }
+  .btn-to-top i {
+    font-size: 1.6rem;
   }
 }
 
