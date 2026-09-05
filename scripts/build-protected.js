@@ -97,7 +97,7 @@ function minifyJs(js) {
 }
 
 function rewriteHtmlReferences(html) {
-  const version = '1775952500';
+  const version = '1775953000';
   return html
     .replace(/css\/loaders\/loader\.css(\?[^"']*)?/g, `css/loaders/loader.min.css?v=${version}`)
     .replace(/css\/plugins\.css(\?[^"']*)?/g, `css/plugins.min.css?v=${version}`)

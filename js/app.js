@@ -2105,25 +2105,27 @@ function updateFloatingWidgetsVisibility() {
 }
 
 // --------------------------------------------- //
-// Hide Banners & Floating UI when Approaching Promo CTA Card Start
+// Hide Banners & Floating UI when Reaching Recent Insights / CTA Card Start
 // --------------------------------------------- //
 function initPromoCardObserver() {
-  const promoEl = document.querySelector('.mxd-promo');
-  if (!promoEl) return;
+  // Target Recent Insights (.mxd-blog-preview) first on pages that have it, or CTA card (.mxd-promo)
+  const targetEl = document.querySelector('.mxd-blog-preview') || document.querySelector('.mxd-promo');
+  if (!targetEl) return;
 
-  function checkPromoProximity() {
-    const rect = promoEl.getBoundingClientRect();
-    const triggerThreshold = window.innerHeight * 0.85;
-    isPromoCardVisible = (rect.top <= triggerThreshold && rect.bottom >= 0);
+  function checkProximity() {
+    const rect = targetEl.getBoundingClientRect();
+    // Hide when top of Recent Insights/CTA enters bottom 75% of screen or when scrolled past it
+    const triggerThreshold = window.innerHeight * 0.75;
+    isPromoCardVisible = (rect.top <= triggerThreshold && rect.bottom >= 0) || (rect.top < 0);
     updateFloatingWidgetsVisibility();
   }
 
-  window.addEventListener('scroll', checkPromoProximity, { passive: true });
-  window.addEventListener('resize', checkPromoProximity, { passive: true });
-  checkPromoProximity();
+  window.addEventListener('scroll', checkProximity, { passive: true });
+  window.addEventListener('resize', checkProximity, { passive: true });
+  checkProximity();
 }
 // --------------------------------------------- //
-// Hide Banners & Floating UI when Approaching Promo CTA Card End
+// Hide Banners & Floating UI when Reaching Recent Insights / CTA Card End
 // --------------------------------------------- //
 
 // --------------------------------------------- //
